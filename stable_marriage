@@ -1,3 +1,5 @@
+# This algorithm assumes that boys propose and girls decide, which according to Gale-Shapley ends up in the best possible stable situation for all boys and worst possible stable situation for all girls. If you want to switch, simply switch the list of boys and girls when calling the main function, no need to edit any of the code!
+
 # The Find(List, String) function looks into the List and returns the index of the first occurence of the String.
 # Each entry of the list itself is a list of length two. Find0 finds the String among first entries, and Find1 finds the Strings among second entries.
 
@@ -110,7 +112,7 @@ def drawTables(Girl, Boy, GirlsPreferences, BoysPreferences):
                 c = (1,0,0)  # If you have rejected, then you are red
             TableB += text(Girl[BoysPreferences[i][j][0]], ((j+1),-n-2-i), rgbcolor=c)
         
-    (TableG + TableB).show(figsize=[5,3],axes=False)
+    (TableG + TableB).show(figsize=[n/2 + 3 ,n/2 + 1],axes=False)
     
 ######################################################
 
@@ -173,3 +175,13 @@ Boys = ['Bingley','Collins','Darcy','Wickhem'] #names of boys
 
 find_stable_marriages(1,Girls, Boys) # that 1 tells me I want to see the resaults of everyday, If you just want to see the final decision change it into 0
 
+#######################################################
+
+# Another sample run with more boys and girls
+
+n = 10
+
+Girls = [ 'Girl '+'%s' %(i+1) for i in range(n) ] #names of girls
+Boys = [ 'Boy '+'%s' %(i+1) for i in range(n) ] #names of boys
+
+find_stable_marriages(0,Girls, Boys) # that 1 tells me I want to see the resaults of everyday, If you just want to see the final decision change it into 0
