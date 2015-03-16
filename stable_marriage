@@ -1,0 +1,71 @@
+# The Find(List, String) function looks into the List and returns the index of the first occurence of the String.
+# Each entry of the list itself is a list of length two. Find0 finds the String among first entries, and Find1 finds the Strings among second entries.
+
+def Find0(List,String):
+    for i in range(len(List)):
+        if String == List[i][0]:
+            return(i)
+        
+    return('none')
+
+def Find1(List,String):
+    for i in range(len(List)):
+        if String == List[i][1]:
+            return(i)
+        
+    return('none')
+    
+########################################################
+
+# Shuffle(List) takes the List and shuffles it.
+# This is just used in to avoid manually making a preference list for each person
+
+def Shuffle(List):
+    n = len(List)
+    tempList= [ [random(),List[i]] for i in range(n)]
+    tempList.sort()
+    
+    finalList = [[tempList[i][1],0] for i in range(n)]
+    #I added that zero after each name which means they are-not-proposed-to/have-not-proposed yet
+    
+    return(finalList)
+    
+#########################################################
+
+# Propose() does today's round of proposals.
+
+def Propose():
+    # Good morning, let's make some proposals today
+    P = [] # this is a list of today's proposals, what? no one has proposed yet? Quich get ready, get the guys!
+    i=0 # strat from the first guy
+    j=0 # start from the first girl in his list
+    while i < n: # Go to each boy in the list
+        while j < n: # Go down their list in order
+            if BoysPreferences[i][j][1] >= 0: # If the girl is not rejected him yet
+                BoysPreferences[i][j][1] = 1  # then propose to her
+                P += [BoysPreferences[i][j][0]] # Add this girl to the list of today's proposals
+                r = Find0(GirlsPreferences[P[i]],i) # Find the girl in the girls list
+                GirlsPreferences[P[i]][r][1] = 1 # Let the girls know she is proposed to
+                i += 1 # go to next boy in the list
+                j=0 # start from the beginning of his list
+                if i == n: # If everyone has proposed for today
+                    return # stop
+            else: # If the girls has rejected him
+                j += 1 # go to next girl in his list
+
+#############################################################
+
+# Accept() does today's round of acceptance of proposals.
+
+def Accept(): # Well well, it's around dinner time and girls have got tons of proposals from their lovers, let's who are the lucky guys today
+    for i in range(n): # Start with the first girl
+        for j in range(n): # Go down her list
+            if GirlsPreferences[i][j][1] == 1: # Is she proposed by this guy? If yes
+                if j <= G[i][1]: # is he at least as good as her current husband? If yes
+                    G[i][1] = j # Accept him
+                else: # If he's not better than her current husband
+                    GirlsPreferences[i][j][1] = -1 # Reject him
+                    r = Find0(BoysPreferences[GirlsPreferences[i][j][0]],i) # Find the guy in the list of the boys
+                    BoysPreferences[GirlsPreferences[i][j][0]][r][1] = -1 # Let him know he is rejected
+                    
+    
