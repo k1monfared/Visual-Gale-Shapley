@@ -34,8 +34,9 @@ def Shuffle(List):
 
 # Propose() does today's round of proposals.
 
-def Propose():
+def Propose(Girl, Boy, GirlsPreferences, BoysPreferences):
     # Good morning, let's make some proposals today
+    n = len(Girl)
     P = [] # this is a list of today's proposals, what? no one has proposed yet? Quich get ready, get the guys!
     i=0 # strat from the first guy
     j=0 # start from the first girl in his list
@@ -57,7 +58,8 @@ def Propose():
 
 # Accept() does today's round of acceptance of proposals.
 
-def Accept(): # Well well, it's around dinner time and girls have got tons of proposals from their lovers, let's who are the lucky guys today
+def Accept(Girl, Boy, GirlsPreferences, BoysPreferences, G): # Well well, it's around dinner time and girls have got tons of proposals from their lovers, let's who are the lucky guys today
+    n = len(Girl)
     for i in range(n): # Start with the first girl
         for j in range(n): # Go down her list
             if GirlsPreferences[i][j][1] == 1: # Is she proposed by this guy? If yes
@@ -68,4 +70,94 @@ def Accept(): # Well well, it's around dinner time and girls have got tons of pr
                     r = Find0(BoysPreferences[GirlsPreferences[i][j][0]],i) # Find the guy in the list of the boys
                     BoysPreferences[GirlsPreferences[i][j][0]][r][1] = -1 # Let him know he is rejected
                     
+########################################################################
+
+# This part gives a visual presentation of the current situation. I'm gonna call this after each proposal and after each acceptance (i.e. twice a day)
+
+def drawTables(Girl, Boy, GirlsPreferences, BoysPreferences):
     
+    n = len(Girl)
+    TableG = text('Girls', (0,1), rgbcolor=(0,0,0))
+    for i in range(n):
+        
+        TableG += text('Choice %s' %(i+1), (i+1,1), rgbcolor=(0,0,0))
+        TableG += line([(-1/2,1/2), (n+1/2,1/2)], rgbcolor=(0,0,0))
+        
+        TableG += text(Girl[i], (0,-i), rgbcolor=(0,0,0))
+        TableG += line([(1/2,3/2), (1/2,-n+1/2)], rgbcolor=(0,0,0))
+        
+        for j in range(n):
+            c = (0,0,1) # Everyone in the list is blue
+            if GirlsPreferences[i][j][1] == 1:
+                c = (.3,.9,.3) # If you're accepted, then you are green
+            elif GirlsPreferences[i][j][1] == -1:
+                c = (1,0,0) # If you are rejected, then you are red
+            TableG += text(Boy[GirlsPreferences[i][j][0]], ((j+1),-i), rgbcolor=c)
+    
+    TableB = text('Boys', (0,-n-1), rgbcolor=(0,0,0))        
+    for i in range(n):
+        TableB += text('Choice %s' %(i+1), (i+1,-n-1), rgbcolor=(0,0,0))
+        TableB += line([(-1/2,-n-3/2), (n+1/2,-n-3/2)], rgbcolor=(0,0,0))
+        
+        TableB += text(Boy[i], (0,-n-2-i), rgbcolor=(0,0,0))
+        TableB += line([(1/2,-n-1/2), (1/2,-3/2-2*n)], rgbcolor=(0,0,0))
+        
+        for j in range(n):
+            c = (0,0,1) # Everyone in the list is blue
+            if BoysPreferences[i][j][1] == 1:
+                c = (.3,.9,.3) # If you're proposed to, then you are green
+            elif BoysPreferences[i][j][1] == -1:
+                c = (1,0,0)  # If you have rejected, then you are red
+            TableB += text(Girl[BoysPreferences[i][j][0]], ((j+1),-n-2-i), rgbcolor=c)
+        
+    (TableG + TableB).show(figsize=[5,3],axes=False)
+    
+######################################################
+
+# And here is where I put all of it together:
+
+def find_stable_marriages(Girl, Boy, GirlsPreferences='none', BoysPreferences='none'):
+    # Girls is a list of names of the girls
+    # Boys is a list of names of boys
+    # GirlsPreferences is a list of n lists, each containing numbers 0,1,...,n-1 exactly ones
+    # BoysPreferences is a list of n lists, each containing numbers 0,1,...,n-1 exactly ones
+
+    n = len(Girl)
+    
+    if GirlsPreferences == 'none': # If you don't give a preference list, this makes a random one
+        GirlsPreferences = [Shuffle([i for i in range(n)]) for i in range(n)]
+    
+    if BoysPreferences == 'none': # If you don't give a preference list, this makes a random one
+        BoysPreferences = [Shuffle([i for i in range(n)]) for i in range(n)]
+        
+    G = [] # G is the list of girls and their current husbands, with default = n, since they are not proposed by anyone yet, so they only have a hypothetical husband.
+    for i in range(n):
+        G.append( [Girls[i], n])
+    
+    
+    M = [0 for i in range(n)] # This is 1 if guy i is married
+    
+    d = 0 # Day zero, it shows a list of girls and boys and their preference lists
+    print('Day %s' %d)
+    drawTables(Girl, Boy, GirlsPreferences, BoysPreferences)
+    
+    while M != [1 for i in range(n)]: # while there is a single guy
+        d += 1 # Go to next day
+        
+        print('Day %s Proposals' %d)
+        Propose(Girl, Boy, GirlsPreferences, BoysPreferences) # Boys propose
+        drawTables(Girl, Boy, GirlsPreferences, BoysPreferences) # Show the situation
+        
+        print('Day %s Acceptances' %d)
+        Accept(Girl, Boy, GirlsPreferences, BoysPreferences, G) # Girls accept or reject
+        drawTables(Girl, Boy, GirlsPreferences, BoysPreferences) # Show the situation
+        
+        M = [ max( [ BoysPreferences[i][j][1] for j in range(n)  ] ) for i in range(n) ]   # Check to see which guy is still single.
+        
+######################################################
+# And a sample run:
+        
+Girls = ['Charlotte','Elizabeth','Jane','Lydia'] #names of girls
+Boys = ['Bingley','Collins','Darcy','Wickhem'] #names of boys
+
+find_stable_marriages(Girls, Boys)
