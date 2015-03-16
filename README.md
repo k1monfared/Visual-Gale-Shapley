@@ -17,3 +17,4 @@ The motivation for this piece of code came from a video by Numberphile youtube c
 
 To Do:
 - I think I'd like to make the tables look like in a way that if someone is rejected gets a cross on top of their name and if they're accepted they're circled, but I'm just too lazy to do that right now.
+- I'd like to do a similar thing for Irving's stable roommate algorithm.
