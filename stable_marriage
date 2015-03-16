@@ -116,12 +116,13 @@ def drawTables(Girl, Boy, GirlsPreferences, BoysPreferences):
 
 # And here is where I put all of it together:
 
-def find_stable_marriages(Girl, Boy, GirlsPreferences='none', BoysPreferences='none'):
+def find_stable_marriages(HowMuch, Girl, Boy, GirlsPreferences='none', BoysPreferences='none'):
     # Girls is a list of names of the girls
     # Boys is a list of names of boys
     # GirlsPreferences is a list of n lists, each containing numbers 0,1,...,n-1 exactly ones
     # BoysPreferences is a list of n lists, each containing numbers 0,1,...,n-1 exactly ones
-
+    # If HowMuch = 0, it only prints the final result, otherwise it prints everyday's result
+        
     n = len(Girl)
     
     if GirlsPreferences == 'none': # If you don't give a preference list, this makes a random one
@@ -138,26 +139,37 @@ def find_stable_marriages(Girl, Boy, GirlsPreferences='none', BoysPreferences='n
     M = [0 for i in range(n)] # This is 1 if guy i is married
     
     d = 0 # Day zero, it shows a list of girls and boys and their preference lists
-    print('Day %s' %d)
-    drawTables(Girl, Boy, GirlsPreferences, BoysPreferences)
+    if HowMuch != 0:
+        print('Day %s' %d)
+        drawTables(Girl, Boy, GirlsPreferences, BoysPreferences)
     
     while M != [1 for i in range(n)]: # while there is a single guy
         d += 1 # Go to next day
         
-        print('Day %s Proposals' %d)
         Propose(Girl, Boy, GirlsPreferences, BoysPreferences) # Boys propose
-        drawTables(Girl, Boy, GirlsPreferences, BoysPreferences) # Show the situation
+        if HowMuch != 0:
+            print('Day %s Proposals' %d)
+            drawTables(Girl, Boy, GirlsPreferences, BoysPreferences) # Show the situation
         
-        print('Day %s Acceptances' %d)
+
         Accept(Girl, Boy, GirlsPreferences, BoysPreferences, G) # Girls accept or reject
-        drawTables(Girl, Boy, GirlsPreferences, BoysPreferences) # Show the situation
+        if HowMuch != 0:
+            print('Day %s Acceptances' %d)
+            drawTables(Girl, Boy, GirlsPreferences, BoysPreferences) # Show the situation
         
         M = [ max( [ BoysPreferences[i][j][1] for j in range(n)  ] ) for i in range(n) ]   # Check to see which guy is still single.
         
+    if HowMuch == 0:
+        print('Final decision made after %s days:' %d)
+        drawTables(Girl, Boy, GirlsPreferences, BoysPreferences) # Show the situation
+######################################################
+
+
 ######################################################
 # And a sample run:
         
 Girls = ['Charlotte','Elizabeth','Jane','Lydia'] #names of girls
 Boys = ['Bingley','Collins','Darcy','Wickhem'] #names of boys
 
-find_stable_marriages(Girls, Boys)
+find_stable_marriages(1,Girls, Boys) # that 1 tells me I want to see the resaults of everyday, If you just want to see the final decision change it into 0
+
