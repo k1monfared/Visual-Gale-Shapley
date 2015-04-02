@@ -16,5 +16,7 @@ In this implementation I am assuming the boys propose and the girls accept/rejec
 The motivation for this piece of code came from a video by Numberphile youtube channle (https://www.youtube.com/watch?v=Qcv1IqHWAzg) interveiwing Dr. Emily Riehl. The names of boys and girls in my small 4x4 example also come from her example. Omid Khanmohammadi sent me the video and after watching it and reading a little bit more about it I was so excited to make a similar example with those tables in it.
 
 To Do:
-- I think I'd like to make the tables look like in a way that if someone is rejected gets a cross on top of their name and if they're accepted they're circled, but I'm just too lazy to do that right now.
 - I'd like to do a similar thing for Irving's stable roommate algorithm.
+- Change colors for proposals and tentative marriages (values in the preference list could be 1 for proposal and 2 for tentative match, and then accordingly changes in the DrawTables function)
+- Show in a bipartite graph way with colored (with arrows?) edges.
+- Write a piece to run it for both girls and guys, then finds each persons best and worst possible match. > then the question is can we get everything in between in some match?
