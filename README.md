@@ -1,4 +1,4 @@
---- This codes runs in SAGE.
+> This codes runs in SAGE.
 
 Visualizing Gale-Shapley Algorithm
 
@@ -21,4 +21,4 @@ To Do:
 - Show in a bipartite graph way with colored (with arrows?) edges.
 - Write a piece to run it for both girls and guys, then finds each persons best and worst possible match. 
 
--> then the question is can we get everything in between in some match?
+> then the question is can we get everything in between in some match?
