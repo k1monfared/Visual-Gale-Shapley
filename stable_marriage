@@ -195,6 +195,19 @@ find_stable_marriages(1,Girls, Boys) # that 1 tells me I want to see the resault
 
 #######################################################
 
+# A sample run where the preferences are not random
+
+G = ['Charlotte','Elizabeth','Jane','Lydia'] #names of girls
+GP = [[[0, 0], [1, 0], [2, 0], [3, 0]], [[3, 0], [2, 0], [1, 0], [0, 0]],
+[[0, 0], [3, 0], [2, 0], [1, 0]], [[0, 0], [3, 0], [2, 0], [1, 0]]] # this is how to define a preferece list
+
+B = ['Bingley','Collins','Darcy','Wickhem'] #names of boys
+BP = [[[1, 0], [0, 0], [3, 0], [2, 0]], [[2, 0], [1, 0], [3, 0], [0, 0]],
+[[2, 0], [0, 0], [3, 0], [1, 0]], [[0, 0], [3, 0], [2, 0], [1, 0]]]
+
+find_stable_marriages(0,G, B, GP, BP) # that 1 tells me I want to see the results of everyday, If you just want to see the final decision change it into 0
+#######################################################
+
 # Another sample run with more boys and girls
 
 n = 10
