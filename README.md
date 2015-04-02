@@ -22,3 +22,8 @@ To Do:
 - Write a piece to run it for both girls and guys, then finds each persons best and worst possible match. 
 
 > then the question is can we get everything in between in some match?
+
+- make it to run over a Hall marriage problem That is not everyone is ranked by everyone! 
+- - One possible idea is that everyone who is not ranked gets to the end of the list (randomly?)
+- - or we could just run the Gale-Shapley over the incomplete ranking lists, if it runs out without a solution, that means there is no stable solution. The question would be what are necessary and sufficient conditions for a solution to exist.
+- - The organ matching problem says everyone needs an organ might come with an organ that does or does not match him, but he's to give up his organ only if he finds an organ that matches him. In this case it is just a permanent-rank problem whih tells a principal submatrix of a the biadjacency matrix is has full permanent rank, what is a maximum one and how to find it! Then we can combine it with the ranked problem.
