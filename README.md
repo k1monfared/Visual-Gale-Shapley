@@ -1,4 +1,4 @@
->>> This codes runs in SAGE.
+--- This codes runs in SAGE.
 
 Visualizing Gale-Shapley Algorithm
 
@@ -20,4 +20,4 @@ To Do:
 - Change colors for proposals and tentative marriages (values in the preference list could be 1 for proposal and 2 for tentative match, and then accordingly changes in the DrawTables function)
 - Show in a bipartite graph way with colored (with arrows?) edges.
 - Write a piece to run it for both girls and guys, then finds each persons best and worst possible match. 
--> then the question is can we get everything in between in some match?
+> then the question is can we get everything in between in some match?
