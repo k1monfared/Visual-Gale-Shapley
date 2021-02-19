@@ -15,6 +15,9 @@ In this implementation I am assuming the boys propose and the girls accept/rejec
 
 The motivation for this piece of code came from a video by Numberphile youtube channle (https://www.youtube.com/watch?v=Qcv1IqHWAzg) interveiwing Dr. Emily Riehl. The names of boys and girls in my small 4x4 example also come from her example. Omid Khanmohammadi sent me the video and after watching it and reading a little bit more about it I was so excited to make a similar example with those tables in it.
 
+Here is a sample run of the code:
+![Day 0](GSV0.png)
+
 To Do:
 - I'd like to do a similar thing for Irving's stable roommate algorithm.
 - Change colors for proposals and tentative marriages (values in the preference list could be 1 for proposal and 2 for tentative match, and then accordingly changes in the DrawTables function)
