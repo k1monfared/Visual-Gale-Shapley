@@ -16,7 +16,20 @@ In this implementation I am assuming the boys propose and the girls accept/rejec
 The motivation for this piece of code came from a video by Numberphile youtube channle (https://www.youtube.com/watch?v=Qcv1IqHWAzg) interveiwing Dr. Emily Riehl. The names of boys and girls in my small 4x4 example also come from her example. Omid Khanmohammadi sent me the video and after watching it and reading a little bit more about it I was so excited to make a similar example with those tables in it.
 
 Here is a sample run of the code:
+
+o On day 0 everyone makes their prefrence list:
+
 <img src="GSV0.png" alt="Day 0 - Preferences" width="400"/>
+
+o On day 1 proposals and responses start until everyone is matched:
+
+<img src="GSV1.png" alt="Day 1 - proposals" width="400"/> <img src="GSV2.png" alt="Day 1 - responses" width="400"/>
+
+<img src="GSV3.png" alt="Day 1 - proposals" width="400"/> <img src="GSV4.png" alt="Day 1 - responses" width="400"/>
+
+<img src="GSV5.png" alt="Day 1 - proposals" width="400"/> <img src="GSV6.png" alt="Day 1 - responses" width="400"/>
+
+<img src="GSV7.png" alt="Day 1 - proposals" width="400"/> <img src="GSV8.png" alt="Day 1 - responses" width="400"/>
 
 To Do:
 - I'd like to do a similar thing for Irving's stable roommate algorithm.
